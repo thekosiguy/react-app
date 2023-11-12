@@ -1,0 +1,126 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+ /*#61DAFB*/
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header, .randomPage {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.randomPage {
+  --s: 50px; /* control the size */
+  --_g: conic-gradient(at 50% 25%,#0000 75%,#f86466 0);
+  
+  background:
+    var(--_g),var(--_g) var(--s) var(--s),
+    var(--_g) calc(2*var(--s)) calc(2*var(--s)),
+    var(--_g) calc(3*var(--s)) calc(3*var(--s)),
+    repeating-linear-gradient(135deg,#000 0 12.5%,#fff 0 25%);
+    background-size: calc(4*var(--s)) calc(4*var(--s))
+}
+
+.App-link {
+  color: blue;
+  font-weight: bolder;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#nextButton {
+  font-size: large;
+}
+
+.countDiv, #button, #scoreEl {
+  position: absolute;
+}
+
+.countDiv {
+  height: 400px;
+  width: 400px;
+  background-color: chartreuse;
+  border: thick dashed black;
+  top: 20px;
+  right: 50px;
+}
+
+#value, #buttonGameTitle{
+  font-size: 45px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: italic;
+  text-align: center;
+}
+
+#value {
+  color: orangered;
+}
+
+#buttonGameTitle {
+  color: blue;
+}
+
+#button {
+  font-size: xx-large;
+  font-style: italic;
+  background-color: red;
+  font-weight: bold;
+  top: 350px;
+  right: 160px;
+}
+
+#scoreEl {
+  top: 240px;
+  right: 190px;
+  font-size: xx-large;
+  color: black;
+  border: thick double magenta;
+}
+
+#options {
+  font-size: xx-large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background: black;
+  font-weight: bold;
+  font-style: italic;
+  color: white;
+}
+
+#randomHeader, #imagesHeader {
+  background-color: yellow;
+  font-size: 70px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: italic;
+  border: thick solid black;
+}
+
+#randomHeader {
+  color:blue
+}
+
+#imagesHeader {
+  color: orangered;
+}
