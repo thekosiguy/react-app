@@ -1,17 +1,25 @@
 import techno from './Image/Techno.jpg';
 import swal from 'sweetalert2';
 import {useState} from 'react';
+import useSound from 'use-sound';
+import speaker from './assets/speaker.png'
+import aaah_yeete from './assets/aaah_yeete.mp3';
 
-function Hello() {
+function RandomPage() {
   let count = 0, score = 0;
   const listOfOperators = ["+", "-", "*", "/"];
-  let operator, input, firstVal, secVal, answer;
+  let operator, firstVal, secVal, answer;
 
   let [imageURL, setURL] = useState(techno);
   let [imageAlt, setAlt] = useState("random_image");
   let [category, setCategory] = useState("nature");
+  let [background, setBackground] = useState("randomPage default");
 
   let blobURL;
+
+  let backgroundValue = 1;
+  const buttonBackground = {background: "yellow"};
+  const border = {border: "thick solid black"};
 
   const getImage = async () => {
     try{
@@ -39,7 +47,7 @@ function Hello() {
     answer = eval(firstVal + operator + secVal);
 
     if (count % 10 === 0 && count !== 0) {
-      swal.fire("Fun Title", "Checkpoint! well done you..", "success");
+      swal.fire("Fun Title...", "Checkpoint! well done you..", "success");
     } else {
       swal.fire({
         title: "Question time!",
@@ -52,13 +60,19 @@ function Hello() {
           }
         }
       }).then((result) => {
-        if (result.value == answer) {
-          score++;
-          document.getElementById("score").innerHTML = score;
-          swal.fire("Yay!", "Well done champ!", "success");
-      } else {
-          swal.fire("Sad times..", "Wrong answer mate..", "error");
-      }
+        if (!result.isDismissed){
+          if (result.value == answer) {
+            score++;
+            swal.fire("Yay!", "Well done champ!", "success");
+          } else {
+              if (!result.isDismissed) {
+                score--;
+                swal.fire("Sad times..", "Wrong answer mate..", "error");
+            }
+          }
+
+        document.getElementById("score").innerHTML = score;
+        }
       })
     }
 
@@ -71,9 +85,40 @@ function Hello() {
     getImage();
    }
 
+   const changeThemeButton = () => {
+      console.log("clicked")
+      let randValue;
+
+      do {
+        randValue = Math.floor((Math.random() * 4)) + 1 
+      } while (randValue ===  backgroundValue);
+
+      backgroundValue = randValue;
+      console.log(backgroundValue)
+
+      switch(backgroundValue) {
+        case 1:
+          setBackground("randomPage ".concat("default"));
+          break;
+        case 2:
+          setBackground("randomPage ".concat("randomTheme"));
+          break;
+        case 3:
+          setBackground("randomPage ".concat("randomTheme2"));
+          break;
+        case 4:
+          setBackground("randomPage ".concat("randomTheme3"));
+          break;
+        default:
+          break;
+      }
+   }
+
+   const [playSound] = useSound(aaah_yeete);
+
     return (
-      <div className="randomPage">
-        <h1 id="randomHeader">Random <span id="imagesHeader">Images!</span></h1>
+      <div className={background}>
+          <h2 id="randomHeader">Random <span id="pageHeader">Page!</span></h2>
         <br/>
         <select id="options" onChange={handleChange}>
           <option value="nature">Nature</option>
@@ -85,25 +130,28 @@ function Hello() {
           <option value="wildlife">wildlife</option>
         </select>
         <br/>
-        <img src={imageURL} onClick={getImage} className="Image" width={600} height={400} alt={imageAlt} />
+        <img src={imageURL} onClick={getImage} className="Image" width={550} height={500} alt={imageAlt} />
+        <br />
+        <button id="changeThemeButton" onClick={changeThemeButton}>Random Theme!</button>
         <a
           className="App-link"
           href="./index"
           rel="noopener noreferrer"
         >
-        <br />
-          Back
+        <p style={{...buttonBackground, ...border}}>Back</p>
         </a>
         <br />
         <div className="countDiv">
-          <p id="buttonGameTitle">Mini Button Game!</p>
+          <p id="buttonGameTitle">Mini Button Game! :)</p>
           <p id="value">{count}</p>
+          <p id="scoreEl">Score: <span id="score">{score}</span></p>
+          <button id="incrementButton" onClick={increment}>Go!</button>
         </div>
-        <br/>
-        <button id="button" onClick={increment}>Increment!</button>
-        <div id="scoreDiv"><h3 id="scoreEl">Score: <span id="score">{score}</span></h3></div>
+        <div className="speakerContainer">
+          <img id="speaker" src={speaker} onClick={playSound} width={60} height={60} alt="speaker"/>
+        </div>
       </div>
     );
 }
 
-export default Hello;
+export default RandomPage;

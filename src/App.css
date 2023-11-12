@@ -10,12 +10,23 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 0.5s linear;
   }
 }
 
+#title {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: italic;
+}
+
+#reactLink {
+  font-size: 40px;
+  color: white;
+  background-color: black;
+  border: 8px solid yellow;
+}
+
 .App-header, .randomPage {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -25,16 +36,80 @@
   color: white;
 }
 
-.randomPage {
+.App-header {
+    --s: 75px; /* control the size */
+    
+    --_c:#0000,#fff 1deg 79deg,#0000 81deg;
+    --g0:conic-gradient(from 140deg at 50% 87.5% ,var(--_c));
+    --g1:conic-gradient(from 140deg at 50% 81.25%,var(--_c));
+    --g2:conic-gradient(from 140deg at 50% 75%   ,var(--_c));
+    --g3:conic-gradient(at 10% 20%,#0000 75%,#fff 0);
+    background:
+      var(--g0) 0 calc(var(--s)/-4),var(--g0) var(--s) calc(3*var(--s)/4),
+      var(--g1) ,var(--g1) var(--s) var(--s),
+      var(--g2) 0 calc(var(--s)/ 4),var(--g2) var(--s) calc(5*var(--s)/4),
+      var(--g3) calc( var(--s)/-10) var(--s),
+      var(--g3) calc(9*var(--s)/10) calc(2*var(--s)),
+      repeating-conic-gradient(from 45deg,#a31e39 0 25%,#31570e 0 50%);
+    background-size: calc(2*var(--s)) calc(2*var(--s));
+}
+
+.default {
   --s: 50px; /* control the size */
   --_g: conic-gradient(at 50% 25%,#0000 75%,#f86466 0);
-  
+    
+    background:
+      var(--_g),var(--_g) var(--s) var(--s),
+      var(--_g) calc(2*var(--s)) calc(2*var(--s)),
+      var(--_g) calc(3*var(--s)) calc(3*var(--s)),
+      repeating-linear-gradient(135deg,#000 0 12.5%,#fff 0 25%);
+      background-size: calc(4*var(--s)) calc(4*var(--s))
+}
+
+.randomTheme {
+  --s: 36px; /* control the size */
+  --c1: #b62f31;
+  --c2: #ecdacb;
+  --c3: #8e1f08;
+    
+  --_g: calc(2*var(--s)*1.732) calc(2*var(--s)) 
+    conic-gradient(from 60deg at 62.5% 50%,var(--c3) 60deg,#0000 0); 
   background:
-    var(--_g),var(--_g) var(--s) var(--s),
-    var(--_g) calc(2*var(--s)) calc(2*var(--s)),
-    var(--_g) calc(3*var(--s)) calc(3*var(--s)),
-    repeating-linear-gradient(135deg,#000 0 12.5%,#fff 0 25%);
-    background-size: calc(4*var(--s)) calc(4*var(--s))
+    calc( 2.598*var(--s)/2) calc(var(--s)/ 2)/var(--_g),
+    calc(-0.866*var(--s)/2) calc(var(--s)/-2)/var(--_g),
+    repeating-conic-gradient(var(--c2) 0 90deg,#0000 0 180deg) 
+    0 0/calc(2*var(--s)*1.732) calc(2*var(--s)),
+    repeating-conic-gradient(from 60deg,var(--c1) 0 60deg,var(--c2) 0 180deg) 
+    0 0/calc(var(--s)*1.732) var(--s)
+}
+
+.randomTheme2 {
+    --s: 200px; /* control the size */
+    
+    --_g: #dc9d37 25%,#fed450 0 50%,#0000 0;
+    --_l1: #fff 0 1px,#0000 0 calc(25% - 1px),#fff 0 25%;
+    --_l2: #fff 0 1px,#0000 0 calc(50% - 1px),#fff 0 50%;
+    background:
+      repeating-linear-gradient( 45deg,var(--_l1)),
+      repeating-linear-gradient(-45deg,var(--_l1)),
+      repeating-linear-gradient(  0deg,var(--_l2)),
+      repeating-linear-gradient( 90deg,var(--_l2)),
+      conic-gradient(from 135deg at 25% 75%,var(--_g)),
+      conic-gradient(from 225deg at 25% 25%,var(--_g)),
+      conic-gradient(from  45deg at 75% 75%,var(--_g)),
+      conic-gradient(from -45deg at 75% 25%,var(--_g)),
+      repeating-conic-gradient(#125c65 0 45deg,#bc4a33 0 90deg);  
+    background-size: var(--s) var(--s);  
+}
+
+.randomTheme3 {
+    --s: 120px; /* control the size*/
+    
+    --_g: radial-gradient(#0000 70%,#1a2030 71%);
+    background:
+      var(--_g),var(--_g) calc(var(--s)/2) calc(var(--s)/2),
+      conic-gradient(#0f9177 25%,#fdebad 0 50%,#d34434 0 75%,#b5d999 0);
+    background-size: var(--s) var(--s); 
 }
 
 .App-link {
@@ -52,27 +127,30 @@
 }
 
 #nextButton {
-  font-size: large;
+  font-size: xx-large;
+  font-weight: bold;
+  background-color: yellow;
+  border: 5px solid magenta;
 }
 
-.countDiv, #button, #scoreEl {
+.countDiv {
   position: absolute;
 }
 
 .countDiv {
-  height: 400px;
-  width: 400px;
+  height: fit-content;
+  width: 20%;
   background-color: chartreuse;
   border: thick dashed black;
-  top: 20px;
-  right: 50px;
+  top: 1%;
+  right: 1%;
+  text-align: center;
 }
 
-#value, #buttonGameTitle{
+#value, #buttonGameTitle {
   font-size: 45px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-style: italic;
-  text-align: center;
 }
 
 #value {
@@ -83,21 +161,25 @@
   color: blue;
 }
 
-#button {
+#incrementButton {
   font-size: xx-large;
   font-style: italic;
-  background-color: red;
+  text-align: center;
+  background-color: black;
   font-weight: bold;
+  color: whitesmoke;
   top: 350px;
-  right: 160px;
 }
 
 #scoreEl {
   top: 240px;
-  right: 190px;
   font-size: xx-large;
   color: black;
-  border: thick double magenta;
+  border: 10px double magenta;
+}
+
+#scoreEl, #score {
+  font-weight: bold;
 }
 
 #options {
@@ -109,18 +191,30 @@
   color: white;
 }
 
-#randomHeader, #imagesHeader {
+#changeThemeButton {
   background-color: yellow;
-  font-size: 70px;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-style: italic;
+  color: red;
   border: thick solid black;
+  font-size: xx-large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: italic;
 }
 
 #randomHeader {
+  background-color: yellow;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 70px;
+  font-style: italic;
+  border: 6px solid black;  
   color:blue
 }
 
-#imagesHeader {
+#pageHeader {
   color: orangered;
+}
+
+.speakerContainer {
+  display: flex;
+  width: 100%;
+  justify-content: left;
 }
