@@ -133,7 +133,7 @@
   border: 5px solid magenta;
 }
 
-.countDiv {
+.countDiv, #mapDiv, #mapInput {
   position: absolute;
 }
 
@@ -161,14 +161,43 @@
   color: blue;
 }
 
-#incrementButton {
+#incrementButton, #mapButton {
   font-size: xx-large;
   font-style: italic;
   text-align: center;
   background-color: black;
   font-weight: bold;
   color: whitesmoke;
-  top: 350px;
+}
+
+#mapInput {
+  top: 60%;
+  left: 7%;
+}
+
+#nameOfPlace {
+  background-color: black;
+  font-size: large;
+  font-style: italic;
+  color: yellow;
+}
+
+#mapDiv {
+  top: 45%;
+  left: 1%;
+  height: 65%;
+  width: 30%;
+}
+
+#searchButton {
+  position: absolute;
+  left: 10%;
+  top: 112%;
+  background-color: black;
+  color: yellow;
+  font-style: italic;
+  font-weight: bold;
+  font-size: x-large;
 }
 
 #scoreEl {
@@ -214,7 +243,8 @@
 }
 
 .speakerContainer {
+  margin-right: auto;
   display: flex;
-  width: 100%;
+  flex-wrap: wrap;
   justify-content: left;
 }

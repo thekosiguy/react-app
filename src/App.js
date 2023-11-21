@@ -1,7 +1,7 @@
 import blank_face from './blank_face.png'
 import speaker from './assets/speaker.png'
 import './App.css';
-import RandomPage from './Component';
+import RandomPage from './RandomPage';
 import {root} from './index';
 import useSound from 'use-sound';
 import wooow from './assets/wooow.mp3';

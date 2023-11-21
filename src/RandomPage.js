@@ -1,3 +1,4 @@
+import {Helmet} from 'react-helmet';
 import techno from './Image/Techno.jpg';
 import swal from 'sweetalert2';
 import {useState} from 'react';
@@ -16,7 +17,6 @@ function RandomPage() {
   let [background, setBackground] = useState("randomPage default");
 
   let blobURL;
-
   let backgroundValue = 1;
   const buttonBackground = {background: "yellow"};
   const border = {border: "thick solid black"};
@@ -86,7 +86,6 @@ function RandomPage() {
    }
 
    const changeThemeButton = () => {
-      console.log("clicked")
       let randValue;
 
       do {
@@ -94,7 +93,6 @@ function RandomPage() {
       } while (randValue ===  backgroundValue);
 
       backgroundValue = randValue;
-      console.log(backgroundValue)
 
       switch(backgroundValue) {
         case 1:
@@ -116,9 +114,66 @@ function RandomPage() {
 
    const [playSound] = useSound(aaah_yeete);
 
+   const getMap = (nameOfPlace) => {
+    var requestOptions = {
+      method: 'GET',
+    };
+
+    let longitude, latitude, coordinates, searchAgain;
+    
+    if (nameOfPlace.length === undefined) {
+      swal.fire("BIG BOI!", "Enter something..-_-", "error");
+    } else {
+      fetch ("https://api.geoapify.com/v1/geocode/search?text="+nameOfPlace.value+"&lang=en&lim=1&type=city&apiKey=a8acdb5f74644df0a4925021bd354663", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          if (result !== undefined) {
+            if (result.features.length > 0) {
+              document.getElementById("mapInput").setAttribute("hidden", "hidden");
+                document.getElementById("mapDiv").removeAttribute("hidden");
+                const map = new window.Microsoft.Maps.Map("#mapDiv");
+
+                longitude = result.features[0].geometry.coordinates[0];
+                latitude = result.features[0].geometry.coordinates[1];
+                console.log(latitude)
+
+                navigator.geolocation.getCurrentPosition(function (position) {
+                  var loc = new window.Microsoft.Maps.Location(
+                      latitude,
+                      longitude);
+
+                var pin = new window.Microsoft.Maps.Pushpin(loc);
+                map.entities.push(pin);
+              
+                map.setView({ center: loc, zoom: 10 })});
+                
+                searchAgain = document.createElement("button");
+                searchAgain.textContent = "Search Again!";
+                searchAgain.setAttribute("id", "searchButton");
+                searchAgain.addEventListener("click", () => {
+                  document.getElementById("mapDiv").setAttribute("hidden", "hidden");
+                  document.getElementById("mapInput").removeAttribute("hidden");
+                  document.getElementById("searchButton").remove();
+                })
+                document.body.appendChild(searchAgain);
+            } else {
+                swal.fire("Wrong :/", "Enter valid name of city or landmark!", "error");
+            }
+          }
+        })
+        .catch(error => {
+          swal.fire("HMMM..", "Something fucked up happened..shieeeet.", "error")
+          console.log("Error", error);
+        });
+      }
+    }
+
     return (
       <div className={background}>
-          <h2 id="randomHeader">Random <span id="pageHeader">Page!</span></h2>
+        <Helmet>
+          <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&userLocation=48.8584,2.2945&key=AqaMjsyOpg5niS9Tyb6APJ_6I8JBrWZdb_HOK2ot-d8m357jJXalI3Xl7W2rAJf5'></script>
+        </Helmet>
+        <h2 id="randomHeader">Random <span id="pageHeader">Page!</span></h2>
         <br/>
         <select id="options" onChange={handleChange}>
           <option value="nature">Nature</option>
@@ -127,7 +182,7 @@ function RandomPage() {
           <option value="food">Food</option>
           <option value="still_life">Still Life</option>
           <option value="abstract">Abstract</option>
-          <option value="wildlife">wildlife</option>
+          <option value="wildlife">Wildlife</option>
         </select>
         <br/>
         <img src={imageURL} onClick={getImage} className="Image" width={550} height={500} alt={imageAlt} />
@@ -140,6 +195,9 @@ function RandomPage() {
         >
         <p style={{...buttonBackground, ...border}}>Back</p>
         </a>
+        <div className="speakerContainer">
+          <img id="speaker" src={speaker} onClick={playSound} width={60} height={60} alt="speaker"/>
+        </div>
         <br />
         <div className="countDiv">
           <p id="buttonGameTitle">Mini Button Game! :)</p>
@@ -147,8 +205,11 @@ function RandomPage() {
           <p id="scoreEl">Score: <span id="score">{score}</span></p>
           <button id="incrementButton" onClick={increment}>Go!</button>
         </div>
-        <div className="speakerContainer">
-          <img id="speaker" src={speaker} onClick={playSound} width={60} height={60} alt="speaker"/>
+        <div id="mapDiv"></div>
+        <div id="mapInput">
+          <input id="nameOfPlace" type="text" placeholder="Name of city or landmark.." />
+          <br /><br />
+         <button id="mapButton" onClick={() => getMap(document.getElementById("nameOfPlace"))}>Map Map Map!</button>
         </div>
       </div>
     );
