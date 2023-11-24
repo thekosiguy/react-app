@@ -1,3 +1,5 @@
+import {root} from './index';
+import RandomPage2 from './RandomPage2';
 import {Helmet} from 'react-helmet';
 import techno from './Image/Techno.jpg';
 import swal from 'sweetalert2';
@@ -89,7 +91,7 @@ function RandomPage() {
       let randValue;
 
       do {
-        randValue = Math.floor((Math.random() * 4)) + 1 
+        randValue = Math.floor((Math.random() * 7)) + 1 
       } while (randValue ===  backgroundValue);
 
       backgroundValue = randValue;
@@ -107,6 +109,12 @@ function RandomPage() {
         case 4:
           setBackground("randomPage ".concat("randomTheme3"));
           break;
+        case 5:
+          setBackground("randomPage ".concat("randomTheme4"));
+          break;
+        case 6:
+          setBackground("randomPage ".concat("randomTheme5"));
+          break;
         default:
           break;
       }
@@ -121,7 +129,7 @@ function RandomPage() {
 
     let longitude, latitude, coordinates, searchAgain;
     
-    if (nameOfPlace.length === undefined) {
+    if (nameOfPlace.value.length === undefined) {
       swal.fire("BIG BOI!", "Enter something..-_-", "error");
     } else {
       fetch ("https://api.geoapify.com/v1/geocode/search?text="+nameOfPlace.value+"&lang=en&lim=1&type=city&apiKey=a8acdb5f74644df0a4925021bd354663", requestOptions)
@@ -168,6 +176,10 @@ function RandomPage() {
       }
     }
 
+    function nextPage() {
+      root.render(<RandomPage2/>);
+    } 
+
     return (
       <div className={background}>
         <Helmet>
@@ -211,6 +223,7 @@ function RandomPage() {
           <br /><br />
          <button id="mapButton" onClick={() => getMap(document.getElementById("nameOfPlace"))}>Map Map Map!</button>
         </div>
+        <button id="next" onClick={nextPage}>Next Page!</button>
       </div>
     );
 }

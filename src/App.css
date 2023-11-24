@@ -10,7 +10,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 0.5s linear;
+    animation: App-logo-spin infinite 0.00001s linear;
   }
 }
 
@@ -112,6 +112,50 @@
     background-size: var(--s) var(--s); 
 }
 
+.randomTheme4 {
+    --s: 120px; /* control the size */
+    
+    --_c: #72e21f /* color 1 */ 25%,#0000 0;
+    --_g1: conic-gradient(at 62.5% 12.5%,var(--_c));
+    --_g2: conic-gradient(at 87.5% 62.5%,var(--_c));
+    --_g3: conic-gradient(at 25%   12.5%,var(--_c));
+    background:
+      var(--_g1) calc( var(--s)/-8) calc(var(--s)/2),var(--_g1) calc(-3*var(--s)/8) calc(var(--s)/4),
+      var(--_g2) calc(3*var(--s)/8) calc(var(--s)/4),var(--_g2) calc(  var(--s)/-8) 0,
+      var(--_g3) 0 calc(var(--s)/-4),var(--_g3) calc(var(--s)/-4) 0,
+      conic-gradient(at 87.5% 87.5%,var(--_c)) calc(var(--s)/8) 0
+      #044012; /* color 2 */
+    background-size: var(--s) var(--s);
+}
+
+.randomTheme5 {
+  --s: 84px; /* control the size */
+  
+  --c: #fff;
+  --a:from -30deg at;
+  background:
+    linear-gradient(#0000 50%,#0004 0),
+    conic-gradient(var(--a) 90%,var(--c) 240deg,#0000    0),
+    conic-gradient(var(--a) 75%,#71e9a0  240deg,#0000    0),
+    conic-gradient(var(--a) 25%,#0000    240deg,var(--c) 0),
+    conic-gradient(var(--a) 40%,var(--c) 240deg,#2a6a9b  0);
+  background-size: calc(1.5*var(--s)) var(--s);
+}
+
+.randomTheme6 {
+  --s: 72px; /* control the size */
+
+  background:
+    radial-gradient(#C02942 24%,#0000 25%),
+    radial-gradient(#53777A 30%,#0000 32%) calc(var(--s)/2) calc(var(--s)/2),
+    repeating-conic-gradient(from 30deg,#ECD078 0 30deg,#D95B43 0 90deg);
+  background-size: var(--s) var(--s); 
+}
+
+body {
+  background-color: blue;
+}
+
 .App-link {
   color: blue;
   font-weight: bolder;
@@ -172,7 +216,7 @@
 
 #mapInput {
   top: 60%;
-  left: 7%;
+  left: 1%;
 }
 
 #nameOfPlace {
@@ -240,6 +284,14 @@
 
 #pageHeader {
   color: orangered;
+}
+
+#next {
+  border: 4px yellow solid;
+  background-color: black;
+  color: white;
+  font-size: xx-large;
+  font-weight: bolder;
 }
 
 .speakerContainer {
