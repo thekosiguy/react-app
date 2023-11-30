@@ -36,6 +36,16 @@
   color: white;
 }
 
+.randomPage2 {
+  background-color: blue;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  column-gap: 10000em;
+  /*align-items: center;
+  justify-content: center;*/
+}
+
 .App-header {
     --s: 75px; /* control the size */
     
@@ -152,10 +162,6 @@
   background-size: var(--s) var(--s); 
 }
 
-body {
-  background-color: blue;
-}
-
 .App-link {
   color: blue;
   font-weight: bolder;
@@ -170,11 +176,17 @@ body {
   }
 }
 
-#nextButton {
+#nextButton, #backButton {
   font-size: xx-large;
   font-weight: bold;
   background-color: yellow;
   border: 5px solid magenta;
+}
+
+#backButton {
+  position: absolute;
+  bottom: 0;
+  left: 47%;
 }
 
 .countDiv, #mapDiv, #mapInput {
@@ -299,4 +311,11 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
+}
+
+#player {
+  border: 15px yellow double;
+  margin: auto;
+  height: fit-content;
+  width: 1000px;
 }
