@@ -4,16 +4,15 @@
 
 .App-logo {
   height: 40vmin;
-  pointer-events: none;
- /*#61DAFB*/
+  /*61DAFB*/
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 0.00001s linear;
+  .App-logo:hover {
+      animation: App-logo-spin infinite 0.00001s linear;
   }
 }
-
+  
 #title {
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-style: italic;
@@ -42,8 +41,6 @@
   display: flex;
   flex-direction: column;
   column-gap: 10000em;
-  /*align-items: center;
-  justify-content: center;*/
 }
 
 .App-header {
@@ -174,19 +171,22 @@
   to {
     transform: rotate(360deg);
   }
+} 
+
+@keyframes rotate-image {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-#nextButton, #backButton {
+#nextButton, #backButton, #newVidButton {
   font-size: xx-large;
   font-weight: bold;
   background-color: yellow;
   border: 5px solid magenta;
-}
-
-#backButton {
-  position: absolute;
-  bottom: 0;
-  left: 47%;
 }
 
 .countDiv, #mapDiv, #mapInput {
@@ -227,7 +227,7 @@
 }
 
 #mapInput {
-  top: 60%;
+  top: 90%;
   left: 1%;
 }
 
@@ -239,21 +239,25 @@
 }
 
 #mapDiv {
-  top: 45%;
+  top: 65%;
   left: 1%;
-  height: 65%;
-  width: 30%;
+  height: 60%;
+  width: 26%;
 }
 
 #searchButton {
-  position: absolute;
-  left: 10%;
-  top: 112%;
+  position: relative;
+  left: 6%;
+  bottom: 365px;
   background-color: black;
   color: yellow;
   font-style: italic;
   font-weight: bold;
   font-size: x-large;
+}
+
+.image:Hover {
+  animation: rotate-image 1.5s infinite;
 }
 
 #scoreEl {
@@ -299,6 +303,7 @@
 }
 
 #next {
+  position: relative;
   border: 4px yellow solid;
   background-color: black;
   color: white;
@@ -308,6 +313,7 @@
 
 .speakerContainer {
   margin-right: auto;
+  margin-bottom: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
@@ -318,4 +324,22 @@
   margin: auto;
   height: fit-content;
   width: 1000px;
+}
+
+#newVidButton {
+  position: relative;
+  left: 40%;
+  bottom: 20px;
+  width: fit-content;
+}
+
+#backButton {
+  position: relative;
+  bottom: 20px;
+  left: 45%;
+  width: fit-content;
+}
+
+::placeholder {
+  color: yellow;
 }

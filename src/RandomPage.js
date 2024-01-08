@@ -1,7 +1,7 @@
 import {root} from './index';
 import RandomPage2 from './RandomPage2';
 import {Helmet} from 'react-helmet';
-import techno from './Image/Techno.jpg';
+import techno from './assets/Techno.jpg';
 import swal from 'sweetalert2';
 import {useState} from 'react';
 import useSound from 'use-sound';
@@ -143,7 +143,6 @@ function RandomPage() {
 
                 longitude = result.features[0].geometry.coordinates[0];
                 latitude = result.features[0].geometry.coordinates[1];
-                console.log(latitude)
 
                 navigator.geolocation.getCurrentPosition(function (position) {
                   var loc = new window.Microsoft.Maps.Location(
@@ -153,8 +152,9 @@ function RandomPage() {
                 var pin = new window.Microsoft.Maps.Pushpin(loc);
                 map.entities.push(pin);
               
-                map.setView({ center: loc, zoom: 10 })});
-                
+                map.setView({ center: loc, zoom: 12})});
+                map.setOptions({maxZoom: 16})
+              
                 searchAgain = document.createElement("button");
                 searchAgain.textContent = "Search Again!";
                 searchAgain.setAttribute("id", "searchButton");
@@ -197,19 +197,9 @@ function RandomPage() {
           <option value="wildlife">Wildlife</option>
         </select>
         <br/>
-        <img src={imageURL} onClick={getImage} className="Image" width={550} height={500} alt={imageAlt} />
+        <img src={imageURL} onClick={getImage} className="image" width={550} height={500} alt={imageAlt} />
         <br />
         <button id="changeThemeButton" onClick={changeThemeButton}>Random Theme!</button>
-        <a
-          className="App-link"
-          href="./index"
-          rel="noopener noreferrer"
-        >
-        <p style={{...buttonBackground, ...border}}>Back</p>
-        </a>
-        <div className="speakerContainer">
-          <img id="speaker" src={speaker} onClick={playSound} width={60} height={60} alt="speaker"/>
-        </div>
         <br />
         <div className="countDiv">
           <p id="buttonGameTitle">Mini Button Game! :)</p>
@@ -224,6 +214,16 @@ function RandomPage() {
          <button id="mapButton" onClick={() => getMap(document.getElementById("nameOfPlace"))}>Map Map Map!</button>
         </div>
         <button id="next" onClick={nextPage}>Next Page!</button>
+        <a
+          className="App-link"
+          href="./index"
+          rel="noopener noreferrer"
+        >
+        <p style={{...buttonBackground, ...border}}>Back</p>
+        </a>
+        <div className="speakerContainer">
+          <img id="speaker" src={speaker} onClick={playSound} width={60} height={60} alt="speaker"/>
+        </div>
       </div>
     );
 }
